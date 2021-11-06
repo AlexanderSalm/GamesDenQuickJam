@@ -9,10 +9,23 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Planning.md",
+            "file": "TODO.md",
             "mode": "source"
           }
-        }
+        },
+        "group": "f38bd4e134fb2428"
+      },
+      {
+        "id": "1f874a4d5c469168",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "TODO.md",
+            "mode": "preview"
+          }
+        },
+        "group": "f38bd4e134fb2428"
       }
     ],
     "direction": "vertical"
@@ -52,7 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 172
   },
   "right": {
     "id": "bfbdc20a0ce3fc77",
@@ -68,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Planning.md",
+                "file": "TODO.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -78,19 +91,41 @@
                 "unlinkedCollapsed": true
               }
             }
+          },
+          {
+            "id": "ae1099c93605d191",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "b5423e2955e9005f",
+            "type": "leaf",
+            "state": {
+              "type": "todo",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 210
   },
   "active": "91d68b4e6425957b",
   "lastOpenFiles": [
-    "Planning.md",
-    "Ideation.md",
     "TODO.md",
-    "Untitled.md"
+    "Planning.md",
+    "Licensing.md",
+    "Ideation.md",
+    "Excalidraw/Game Layout.md",
+    "Images/Pasted image 20211105190851.png",
+    "Images/Pasted image 20211105190700.png",
+    "atlas_16x.png",
+    "Images/Pasted image 20211105185812.png",
+    "sadge.png"
   ]
 }

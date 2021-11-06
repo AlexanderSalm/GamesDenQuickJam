@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - EnemyContactTag
+  - Knife
+  - Bow
+  - Arrow
+  - Drop
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -11,12 +17,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PlayerLayer
+  - WallLayer
+  - WeaponLayer
+  - EnemyLayer
+  - ArrowLayer
+  - DropLayer
   - 
   - 
   - 
