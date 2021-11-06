@@ -2026,6 +2026,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d811c2f4c124ce48851bfa36c0ac91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dungeonWidth: 3
+  dungeonHeight: 3
   floors:
   - {fileID: 9169223650935777012, guid: 53b97623efd6c88449e79678e61f2fef, type: 3}
   - {fileID: 4336781334369166910, guid: 5303b56d239d52d429f66827ad7fe086, type: 3}
@@ -2038,7 +2040,10 @@ MonoBehaviour:
   - {fileID: 7407319529085386115, guid: 200c95c5c1ccb4b4ca6035094885c504, type: 3}
   - {fileID: 4732406821914171186, guid: b17365356c2ca8e458be9941c80851d5, type: 3}
   enemies:
-  - {fileID: 4585803862700520851, guid: 3035dcee84a8b3d4687c5fa75f0179b2, type: 3}
+  - {fileID: 6911107742151101229, guid: 87f335bf055f08e40801e758d15b0666, type: 3}
+  - {fileID: 8305796914567958311, guid: c3221d2abed7a894380f96b3d31da2ce, type: 3}
+  - {fileID: 4406071986515303361, guid: 0b75170dd92c09b4cb31c8f015746b16, type: 3}
+  - {fileID: 2744042221934462815, guid: b39825a7a73f70e49b34e21c4b06b9d0, type: 3}
 --- !u!4 &1842945984
 Transform:
   m_ObjectHideFlags: 0

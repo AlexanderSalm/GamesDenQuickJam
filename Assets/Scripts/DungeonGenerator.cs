@@ -13,18 +13,56 @@ public class DungeonGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        int dungeonWidth = Random.Range(1, 7);
+        int dungeonHeight = Random.Range(1, 7);
         tf = GetComponent<Transform>();
-        List<Vector2> doors = new List<Vector2>();
-        doors.Add(new Vector2(7, 8));
-        doors.Add(new Vector2(8, 8));
-        doors.Add(new Vector2(9, 8));
-        doors.Add(new Vector2(10, 8));
+        int roomWidth = 12;
+        int roomHeight = 12;
+        int hallWidth = 4;
+        int hallLength = 16;
+        for (int roomX = 0; roomX < dungeonWidth; roomX++) {
+            for (int roomY = 0; roomY < dungeonHeight; roomY++) {
+                Debug.Log("loop");
+                List<Vector2> doors = new List<Vector2>();
+                //Top wall
+                if (roomY != 0) {
+                    doors.Add(new Vector2(5, 0));
+                    doors.Add(new Vector2(6, 0));
+                    doors.Add(new Vector2(7, 0));
+                }
 
-        doors.Add(new Vector2(12, 4));
-        doors.Add(new Vector2(12, 3));
-        GenerateRoom(12, 8, tf.position, doors, 3);
-        GenerateVertHallway(5, 12, tf.position + new Vector3(6 * TILE_SIZE, 8 * TILE_SIZE));
-        GenerateHoriHallway(12, 3, tf.position + new Vector3(12 * TILE_SIZE, 2 * TILE_SIZE));
+                //Bottom wall
+                if (roomY != dungeonHeight - 1) {
+                    doors.Add(new Vector2(5, 12));
+                    doors.Add(new Vector2(6, 12));
+                    doors.Add(new Vector2(7, 12));
+                }
+
+                //Left wall
+                if (roomX != 0) {
+                    doors.Add(new Vector2(0, 6));
+                    doors.Add(new Vector2(0, 7));
+                    doors.Add(new Vector2(0, 5));
+                }
+
+                //Right wall
+                if (roomX != dungeonWidth - 1) {
+                    doors.Add(new Vector2(12, 6));
+                    doors.Add(new Vector2(12, 7));
+                    doors.Add(new Vector2(12, 5));
+                }
+
+                GenerateRoom(12, 12, tf.position + new Vector3((roomX) * (roomWidth + hallLength) * TILE_SIZE, (roomY) * (roomHeight + hallLength) * TILE_SIZE), doors, 3);
+
+                if (roomX != dungeonWidth - 1) GenerateHoriHallway(hallLength, hallWidth, tf.position + new Vector3(
+                    ((roomX) * (roomWidth + hallLength) * TILE_SIZE) + (roomWidth * TILE_SIZE), 
+                    (roomY) * (roomHeight + hallLength) * TILE_SIZE + ((roomHeight-3)/2 * TILE_SIZE)));
+
+                if (roomY != dungeonHeight - 1) GenerateVertHallway(hallWidth, hallLength, tf.position + new Vector3(
+                    ((roomX) * (roomWidth + hallLength) * TILE_SIZE) + ((roomWidth-3)/2 * TILE_SIZE),
+                    (roomY) * (roomHeight + hallLength) * TILE_SIZE + (roomHeight * TILE_SIZE)));
+            }
+        }
     }
 
     // Update is called once per frame
@@ -36,20 +74,19 @@ public class DungeonGenerator : MonoBehaviour
     void GenerateRoom(int width, int height, Vector3 position, List<Vector2> doors, int numEnemies) {
         for (int x = 0; x < width + 1; x++) {
             for (int y = 0; y < height + 1; y++) {
-                if (!doors.Contains(new Vector2(x, y))) {
-                    GameObject tile;
-                    if (x < width && x > 0 && y < height && y > 0) {
-                        int rand = Random.Range(0, floors.Count);
-                        tile = Instantiate(floors[rand]);
-
-                    }
-                    else {
-                        int rand = Random.Range(0, walls.Count);
-                        tile = Instantiate(walls[rand]);
-                    }
-                    tile.GetComponent<Transform>().position = position + new Vector3(x * TILE_SIZE, y * TILE_SIZE, tile.GetComponent<Transform>().position.z);
+                GameObject tile;
+                if (((x < width && x > 0 && y < height && y > 0) || doors.Contains(new Vector2(x, y)))) {
+                    int rand = Random.Range(0, floors.Count);
+                    tile = Instantiate(floors[rand]);
 
                 }
+                else {
+                    int rand = Random.Range(0, walls.Count);
+                    tile = Instantiate(walls[rand]);
+                }
+                tile.GetComponent<Transform>().position = position + new Vector3(x * TILE_SIZE, y * TILE_SIZE, tile.GetComponent<Transform>().position.z);
+
+                
             }
         }
 

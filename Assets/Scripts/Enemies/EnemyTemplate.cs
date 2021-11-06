@@ -28,7 +28,7 @@ public class EnemyTemplate : MonoBehaviour
     private AudioSource die;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
@@ -37,7 +37,7 @@ public class EnemyTemplate : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         float dt = Time.deltaTime;
         timeSinceLastHit += dt;
@@ -58,7 +58,7 @@ public class EnemyTemplate : MonoBehaviour
         //iFramesFlasher = !iFramesFlasher;
     }
 
-    private void OnCollisionStay2D(Collision2D col) {
+    public void OnCollisionStay2D(Collision2D col) {
         if (timeSinceLastHit > iFramesDuration) {
             Vector2 vel = col.relativeVelocity.normalized;
             Debug.Log(vel);

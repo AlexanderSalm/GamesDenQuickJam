@@ -10,11 +10,13 @@ public class ArrowController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Transform tf;
+    private AudioSource hit;
     // Start is called before the first frame update
     void Start()
     {
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
+        hit = GetComponents<AudioSource>()[0];
     }
 
     // Update is called once per frame
@@ -25,6 +27,13 @@ public class ArrowController : MonoBehaviour
     }
 
     public void OnHit() {
+        AudioSource.PlayClipAtPoint(hit.clip, rb.position);
         Destroy(this.gameObject);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Wall") {
+            OnHit();
+        }
     }
 }
