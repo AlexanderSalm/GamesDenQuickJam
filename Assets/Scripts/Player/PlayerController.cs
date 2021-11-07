@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public static int maxHealth = 100;
 
     public float speed;
+    public float boostIncrease;
+    public float boostDecaySpeed;
     public string enemyTag;
 
     public GameObject knife;
@@ -37,19 +39,29 @@ public class PlayerController : MonoBehaviour {
 
     public bool inKitchen = false;
 
+    public static string deathMessage;
+
     public GameObject hpText;
 
     public GameObject dungeonThreshold;
     public GameObject dungeonGenerator;
     
     private Transform tf;
+    private bool played = false;
+    private float minSpeed;
     private Rigidbody2D rb;
     private Camera camera;
+    private AudioSource boostSFX;
+    private ParticleSystem ps;
     // Start is called before the first frame update
     void Start() {
+        deathMessage = "You were slain...";
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         camera = GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponent<Camera>();
+        minSpeed = speed;
+        boostSFX = GetComponents<AudioSource>()[0];
+        ps = GetComponent<ParticleSystem>();
     }
 
     void Update() {
@@ -61,6 +73,30 @@ public class PlayerController : MonoBehaviour {
         timeSinceLastHit += dt;
 
         hpText.GetComponent<Text>().text = "HP: " + health.ToString();
+
+        speed = Mathf.Lerp(speed, minSpeed, dt * boostDecaySpeed);
+        if (speed - 0.01f < minSpeed) speed = minSpeed;
+
+        Debug.Log("Speed: " + speed.ToString() + "  minSpeed: " + minSpeed.ToString());
+        if (speed > minSpeed && !played) {
+            played = true;
+            ps.Play();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)) {
+            if (InventoryController.slimeCount > 0
+                || InventoryController.wizardCount > 0
+                || InventoryController.orcCount > 0
+                || InventoryController.ghostCount > 0) {
+                speed += boostIncrease;
+                InventoryController.subtractHighestIngrediant();
+                boostSFX.Play();
+                played = false;
+            }
+            else {
+                ConveyorBeltController.error.Play();
+            }
+        }
 
         rotateWeapons();
 
@@ -108,6 +144,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void died() {
+        SceneManager.LoadScene("Game Over");
         Debug.Log("Died :(");
     }
 
@@ -255,6 +292,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public static void plateExpiredHook() {
+        deathMessage = "You let an order expire!";
         SceneManager.LoadScene("Game Over");
     }
 

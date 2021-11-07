@@ -9,10 +9,12 @@ public class CraftMealController : MonoBehaviour
     public float sensitivity;
 
     public static float distance;
+    public float elevateDistance;
 
     private GameObject player;
     private Transform tf;
     private GameObject eGraphic;
+    private Vector3 spawnPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class CraftMealController : MonoBehaviour
         player = GameObject.FindGameObjectsWithTag("Player")[0];
         eGraphic = tf.GetChild(0).gameObject;
         minDistance = minDistanceSetter;
+        spawnPos = eGraphic.transform.position;
     }
 
     // Update is called once per frame
@@ -33,8 +36,8 @@ public class CraftMealController : MonoBehaviour
             }
         }
 
-
-        setAlpha(eGraphic.GetComponent<SpriteRenderer>(), distance);
+        eGraphic.transform.position = new Vector3(spawnPos.x, Mathf.Lerp(spawnPos.y, spawnPos.y + elevateDistance, distance), spawnPos.z);
+       
     }
     void setAlpha(SpriteRenderer i, float closeness) {
         Color c = i.color;

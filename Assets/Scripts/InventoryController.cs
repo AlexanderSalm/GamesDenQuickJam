@@ -43,4 +43,19 @@ public class InventoryController : MonoBehaviour
             ghostCount++;
         }
     }
+
+    public static void subtractHighestIngrediant() {
+        if (slimeCount >= orcCount && slimeCount >= wizardCount && slimeCount >= ghostCount) {
+            slimeCount--;
+        }
+        else if (orcCount >= slimeCount && orcCount >= wizardCount && orcCount >= ghostCount) {
+            orcCount--;
+        }
+        else if (wizardCount >= slimeCount && wizardCount >= orcCount && wizardCount >= ghostCount) {
+            wizardCount--;
+        }
+        else {
+            ghostCount--;
+        }
+    }
 }

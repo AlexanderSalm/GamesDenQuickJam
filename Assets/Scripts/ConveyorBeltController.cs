@@ -16,6 +16,7 @@ public class ConveyorBeltController : MonoBehaviour
     public int hardDishesThreshold;
 
     public int dishesMade;
+    public static int dishesMadeCount;
     public float speedThreshold;
 
     public static int dishCount;
@@ -53,6 +54,7 @@ public class ConveyorBeltController : MonoBehaviour
     void Update()
     {
         dishCount = currentDishes.Count;
+        dishesMadeCount = dishesMade;
         if (dishesMade == hardDishesThreshold && !hardAdded) {
             hardAdded = true;
             for(int i = 0; i < hardDishes.Count; i++) {

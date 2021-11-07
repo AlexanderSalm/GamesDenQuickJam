@@ -349,3 +349,4 @@ MonoBehaviour:
   knifeKnockback: 3
   bowKnockback: 1
   drop: {fileID: 4224016704858212673, guid: fc4c99c70db9f75409ce0f3aaa6716f5, type: 3}
+  smokeEmitter: {fileID: 1943075900993867477, guid: b9718edd2042ec340800b06a50800aff, type: 3}

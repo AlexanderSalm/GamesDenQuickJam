@@ -19,6 +19,7 @@ public class EnemyTemplate : MonoBehaviour
     public float bowKnockback;
 
     public GameObject drop;
+    public GameObject smokeEmitter;
 
     //private bool iFramesFlasher = false;
 
@@ -96,6 +97,9 @@ public class EnemyTemplate : MonoBehaviour
         AudioSource.PlayClipAtPoint(die.clip, rb.position);
         GameObject spawnedDrop = Instantiate(drop);
         spawnedDrop.GetComponent<Transform>().position = new Vector3(tf.position.x, tf.position.y, spawnedDrop.GetComponent<Transform>().position.z);
+
+        GameObject smoke = Instantiate(smokeEmitter);
+        smoke.GetComponent<Transform>().position = new Vector3(tf.position.x, tf.position.y, smoke.GetComponent<Transform>().position.z);
 
         Destroy(this.gameObject);
     }

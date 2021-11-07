@@ -27,3 +27,10 @@
 [Game Over Song](https://wingless-seraph.net/en/material-music_horror.html)
 
 [Title Screen Song](https://wingless-seraph.net/en/material-music_dangeon.html)
+
+[BoostSFX](https://mixkit.co/free-sound-effects/magic/)
+
+[Sparkle](https://s-a-t-u-r-n.itch.io/2d-pixelart-stars)
+
+[Health Bar](https://adwitr.itch.io/pixel-health-bar-asset-pack-2/download/eyJleHBpcmVzIjoxNjM2MzI0MTc2LCJpZCI6MjU2NDMyfQ%3d%3d.SagPk9gup3TvVBdymmvKig3ICs0%3d)
+

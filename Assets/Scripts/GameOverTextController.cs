@@ -9,8 +9,20 @@ public class GameOverTextController : MonoBehaviour
     private Color color;
     public float time;
     private float elapsedTime;
+    public bool dm;
+    public bool hs;
     void Start()
     {
+        if (!PlayerPrefs.HasKey("HS")) PlayerPrefs.SetInt("HS", -1);
+
+        if (ConveyorBeltController.dishesMadeCount > PlayerPrefs.GetInt("HS")) {
+            PlayerPrefs.SetInt("HS", ConveyorBeltController.dishesMadeCount);
+        }
+
+        if (dm) GetComponent<Text>().text = PlayerController.deathMessage;
+        else if (hs) GetComponent<Text>().text = "High Score: " + PlayerPrefs.GetInt("HS").ToString();
+        else GetComponent<Text>().text = "Score: " + ConveyorBeltController.dishesMadeCount.ToString();
+
         
     }
 

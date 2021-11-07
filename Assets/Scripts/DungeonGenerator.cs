@@ -24,9 +24,9 @@ public class DungeonGenerator : MonoBehaviour
         int dungeonHeight = Random.Range(heightMin, 5);
         
         int roomWidth = 12;
-        int roomHeight = 12;
+        int roomHeight= 12;
         int hallWidth = 4;
-        int hallLength = 16;
+        int hallLength = Random.Range(1, 32);
         for (int roomX = 0; roomX < dungeonWidth; roomX++) {
             for (int roomY = 0; roomY < dungeonHeight; roomY++) {
                 Debug.Log("loop");
