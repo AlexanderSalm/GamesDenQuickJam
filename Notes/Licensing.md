@@ -15,3 +15,9 @@
 [Ui Font](https://www.fontspace.com/pixeboy-font-f43730)
 
 [Casual SFX](https://assetstore.unity.com/packages/audio/sound-fx/free-casual-game-sfx-pack-54116)
+
+[Bell Chime](https://mixkit.co/free-sound-effects/bell/)
+
+[Food](https://ghostpixxells.itch.io/pixelfood)
+
+[Kitchen Assets](https://reakain.itch.io/kitchen-assets)

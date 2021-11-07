@@ -52,6 +52,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
+
+        //unfixedMovementHandle();
+
         float dt = Time.deltaTime;
         timeSinceLastAttack += dt;
         timeSinceLastHit += dt;
@@ -96,6 +99,11 @@ public class PlayerController : MonoBehaviour {
         if (health <= 0) {
             died();
         }
+    }
+
+    public static void heal(int damage) {
+        health = Mathf.Max(health + damage, 100);
+        
     }
 
     void died() {
@@ -197,17 +205,41 @@ public class PlayerController : MonoBehaviour {
         }
         if (Input.GetKey(KeyCode.A)) {
             movementVector += new Vector2(-speed * dt, 0);
+            GetComponent<SpriteRenderer>().flipX = true;
         }
         if (Input.GetKey(KeyCode.S)) {
             movementVector += new Vector2(0, -speed * dt);
         }
         if (Input.GetKey(KeyCode.D)) {
             movementVector += new Vector2(speed * dt, 0);
+            GetComponent<SpriteRenderer>().flipX = false;
         }
 
         rb.MovePosition(rb.position + movementVector);
         //tf.position = tf.position + movementVector;
         //rb.velocity = movementVector;
+    }
+
+    void unfixedMovementHandle() {
+        float dt = Time.deltaTime;
+
+        Vector2 movementVector = new Vector2(0, 0);
+        if (Input.GetKey(KeyCode.W)) {
+            movementVector += new Vector2(0, speed);
+        }
+        if (Input.GetKey(KeyCode.A)) {
+            movementVector += new Vector2(-speed, 0);
+        }
+        if (Input.GetKey(KeyCode.S)) {
+            movementVector += new Vector2(0, -speed);
+        }
+        if (Input.GetKey(KeyCode.D)) {
+            movementVector += new Vector2(speed, 0);
+        }
+
+        //rb.MovePosition(rb.position + movementVector);
+        //tf.position = tf.position + movementVector;
+        rb.velocity = movementVector;
     }
     public void enterKitchen() {
         inKitchen = true;
@@ -219,6 +251,10 @@ public class PlayerController : MonoBehaviour {
         inKitchen = false;
         Debug.Log("dungeon entered");
         dungeonGenerator.GetComponent<DungeonGenerator>().GenerateDungeon();
+    }
+
+    public static void plateExpiredHook() {
+        Debug.Log("Expired!");
     }
 
     void OnCollisionStay2D(Collision2D col) {

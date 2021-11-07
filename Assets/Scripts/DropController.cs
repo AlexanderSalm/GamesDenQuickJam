@@ -23,7 +23,6 @@ public class DropController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Drop: " + velocity.ToString());
         float dt = Time.deltaTime;
         velocity.x = Mathf.Lerp(velocity.x, 0, spawnDuration * dt);
 

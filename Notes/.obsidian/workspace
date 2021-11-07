@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "TODO.md",
+            "file": "Ideation.md",
             "mode": "source"
           }
         },
@@ -21,7 +21,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "TODO.md",
+            "file": "Ideation.md",
             "mode": "preview"
           }
         },
@@ -81,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TODO.md",
+                "file": "Ideation.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,10 +117,10 @@
   },
   "active": "91d68b4e6425957b",
   "lastOpenFiles": [
+    "Ideation.md",
+    "Licensing.md",
     "TODO.md",
     "Planning.md",
-    "Licensing.md",
-    "Ideation.md",
     "Excalidraw/Game Layout.md",
     "Images/Pasted image 20211105190851.png",
     "Images/Pasted image 20211105190700.png",
