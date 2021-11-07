@@ -61,7 +61,6 @@ public class EnemyTemplate : MonoBehaviour
     public void OnCollisionStay2D(Collision2D col) {
         if (timeSinceLastHit > iFramesDuration) {
             Vector2 vel = col.relativeVelocity.normalized;
-            Debug.Log(vel);
             if (col.gameObject.tag == "Knife") {
                 Debug.Log("Knife Hit");
                 knockback = new Vector2(

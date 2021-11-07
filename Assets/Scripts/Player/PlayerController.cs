@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour {
     public bool inKitchen = false;
 
     public GameObject hpText;
+
+    public GameObject dungeonThreshold;
+    public GameObject dungeonGenerator;
     
     private Transform tf;
     private Rigidbody2D rb;
@@ -57,12 +60,23 @@ public class PlayerController : MonoBehaviour {
 
         rotateWeapons();
 
-        handleAttacks();
+        if (!inKitchen) handleAttacks();
 
         GetComponent<SpriteRenderer>().enabled = iFramesFlasher || timeSinceLastHit > iFramesDuration;
         iFramesFlasher = !iFramesFlasher;
 
         tf.eulerAngles = new Vector3(0, 0, 0);
+
+        if (tf.position.x < dungeonThreshold.GetComponent<Transform>().position.x) {
+            if (!inKitchen) {
+                enterKitchen();
+            }
+        }
+        else if (tf.position.x > dungeonThreshold.GetComponent<Transform>().position.x) {
+            if (inKitchen) {
+                enterDungeon();
+            }
+        }
 
     }
 
@@ -89,6 +103,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void rotateWeapons() {
+        knife.GetComponent<SpriteRenderer>().enabled = knifeActive && !inKitchen;
+        bow.GetComponent<SpriteRenderer>().enabled = bowActive && !inKitchen;
+
         Vector3 mousePoint = camera.ScreenToWorldPoint(Input.mousePosition);
 
         float angle = Mathf.Atan2(tf.position.y - mousePoint.y, tf.position.x - mousePoint.x) * Mathf.Rad2Deg;
@@ -169,9 +186,6 @@ public class PlayerController : MonoBehaviour {
                 knifeActive = false;
             }
         }
-
-        knife.GetComponent<SpriteRenderer>().enabled = knifeActive && !inKitchen;
-        bow.GetComponent<SpriteRenderer>().enabled = bowActive && !inKitchen;
     }
 
     void movementHandle() {
@@ -195,6 +209,18 @@ public class PlayerController : MonoBehaviour {
         //tf.position = tf.position + movementVector;
         //rb.velocity = movementVector;
     }
+    public void enterKitchen() {
+        inKitchen = true;
+        Debug.Log("kitchen entered");
+        dungeonGenerator.GetComponent<DungeonGenerator>().DestroyDungeon();
+    }
+
+    public void enterDungeon() {
+        inKitchen = false;
+        Debug.Log("dungeon entered");
+        dungeonGenerator.GetComponent<DungeonGenerator>().GenerateDungeon();
+    }
+
     void OnCollisionStay2D(Collision2D col) {
         float dt = Time.deltaTime;
         if (col.gameObject.tag == enemyTag) {
@@ -215,6 +241,6 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D col) {
-        
+
     }
 }

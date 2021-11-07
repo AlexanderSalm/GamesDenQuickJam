@@ -9,13 +9,20 @@ public class DungeonGenerator : MonoBehaviour
     public List<GameObject> walls;
     public List<GameObject> enemies;
 
+    public List<GameObject> woodFloors;
+
     private Transform tf;
     // Start is called before the first frame update
-    void Start()
-    {
-        int dungeonWidth = Random.Range(1, 7);
-        int dungeonHeight = Random.Range(1, 7);
+    private void Start() {
         tf = GetComponent<Transform>();
+        //GenerateDungeon();
+        //GenerateKitchen();
+    }
+    public void GenerateDungeon()
+    {
+        int dungeonWidth = Random.Range(1, 5);
+        int dungeonHeight = Random.Range(1, 5);
+        
         int roomWidth = 12;
         int roomHeight = 12;
         int hallWidth = 4;
@@ -39,7 +46,7 @@ public class DungeonGenerator : MonoBehaviour
                 }
 
                 //Left wall
-                if (roomX != 0) {
+                if (roomX != 0 || (roomX == 0 && roomY == 0)) {
                     doors.Add(new Vector2(0, 6));
                     doors.Add(new Vector2(0, 7));
                     doors.Add(new Vector2(0, 5));
@@ -52,7 +59,9 @@ public class DungeonGenerator : MonoBehaviour
                     doors.Add(new Vector2(12, 5));
                 }
 
-                GenerateRoom(12, 12, tf.position + new Vector3((roomX) * (roomWidth + hallLength) * TILE_SIZE, (roomY) * (roomHeight + hallLength) * TILE_SIZE), doors, 3);
+                int enemies = Random.Range(1, 6);
+
+                GenerateRoom(12, 12, tf.position + new Vector3((roomX) * (roomWidth + hallLength) * TILE_SIZE, (roomY) * (roomHeight + hallLength) * TILE_SIZE), doors, enemies);
 
                 if (roomX != dungeonWidth - 1) GenerateHoriHallway(hallLength, hallWidth, tf.position + new Vector3(
                     ((roomX) * (roomWidth + hallLength) * TILE_SIZE) + (roomWidth * TILE_SIZE), 
@@ -65,10 +74,20 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    void GenerateKitchen() {
+        for(int x = 0; x < 20; x++) {
+            for(int y = 0; y < 20; y++) {
+                int rand = Random.Range(0, woodFloors.Count);
+                GameObject tile = Instantiate(woodFloors[rand]);
+                tile.GetComponent<Transform>().position = new Vector3(-36.5f, 0) + new Vector3(x * TILE_SIZE, y * TILE_SIZE, tile.GetComponent<Transform>().position.z);
+        }
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void GenerateRoom(int width, int height, Vector3 position, List<Vector2> doors, int numEnemies) {
@@ -78,11 +97,13 @@ public class DungeonGenerator : MonoBehaviour
                 if (((x < width && x > 0 && y < height && y > 0) || doors.Contains(new Vector2(x, y)))) {
                     int rand = Random.Range(0, floors.Count);
                     tile = Instantiate(floors[rand]);
+                    tile.GetComponent<Transform>().parent = tf;
 
                 }
                 else {
                     int rand = Random.Range(0, walls.Count);
                     tile = Instantiate(walls[rand]);
+                    tile.GetComponent<Transform>().parent = tf;
                 }
                 tile.GetComponent<Transform>().position = position + new Vector3(x * TILE_SIZE, y * TILE_SIZE, tile.GetComponent<Transform>().position.z);
 
@@ -96,6 +117,7 @@ public class DungeonGenerator : MonoBehaviour
             float randX = Random.Range(1.0f, width - 1);
             float randY = Random.Range(1.0f, height - 1);
             GameObject spawnedEnemy = Instantiate(enemy);
+            spawnedEnemy.GetComponent<Transform>().parent = tf;
             spawnedEnemy.GetComponent<Transform>().position = position + new Vector3(randX * TILE_SIZE, randY * TILE_SIZE, 0);
         }
     }
@@ -107,11 +129,13 @@ public class DungeonGenerator : MonoBehaviour
                 if (x < width && x > 0) {
                     int rand = Random.Range(0, floors.Count);
                     tile = Instantiate(floors[rand]);
+                    tile.GetComponent<Transform>().parent = tf;
 
                 }
                 else {
                     int rand = Random.Range(0, walls.Count);
                     tile = Instantiate(walls[rand]);
+                    tile.GetComponent<Transform>().parent = tf;
                 }
                 tile.GetComponent<Transform>().position = position + new Vector3(x * TILE_SIZE, y * TILE_SIZE, tile.GetComponent<Transform>().position.z);
             }
@@ -125,14 +149,22 @@ public class DungeonGenerator : MonoBehaviour
                 if (y < height && y > 0) {
                     int rand = Random.Range(0, floors.Count);
                     tile = Instantiate(floors[rand]);
+                    tile.GetComponent<Transform>().parent = tf;
 
                 }
                 else {
                     int rand = Random.Range(0, walls.Count);
                     tile = Instantiate(walls[rand]);
+                    tile.GetComponent<Transform>().parent = tf;
                 }
                 tile.GetComponent<Transform>().position = position + new Vector3(x * TILE_SIZE, y * TILE_SIZE, tile.GetComponent<Transform>().position.z);
             }
+        }
+    }
+
+    public void DestroyDungeon() {
+        foreach(Transform child in tf) {
+            Destroy(child.gameObject);
         }
     }
 }

@@ -10,6 +10,9 @@ TagManager:
   - Arrow
   - Drop
   - Wall
+  - KitchenSwap
+  - DungeonSwap
+  - Inventory
   layers:
   - Default
   - TransparentFX
