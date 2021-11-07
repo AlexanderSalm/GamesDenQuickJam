@@ -30,6 +30,7 @@ public class DishController : MonoBehaviour
 
     private RectTransform tf;
     private Canvas can;
+    public float danger;
     private float elapsedTime = 0.0f;
     private Image timerIndicator;
 
@@ -50,6 +51,7 @@ public class DishController : MonoBehaviour
     void Update()
     {
         elapsedTime += Time.deltaTime;
+        danger = elapsedTime / timeLimit;
 
         if (elapsedTime > timeLimit) PlayerController.plateExpiredHook();
         timerIndicator.fillAmount = elapsedTime / timeLimit;

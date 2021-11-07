@@ -16,6 +16,7 @@ public class ConveyorBeltController : MonoBehaviour
     public int hardDishesThreshold;
 
     public int dishesMade;
+    public float speedThreshold;
 
     public static int dishCount;
 
@@ -64,7 +65,7 @@ public class ConveyorBeltController : MonoBehaviour
         timeSinceLastDish += Time.deltaTime;
         if (timeSinceLastDish > timeToNextDish) {
             addDish();
-            timeToNextDish = Random.Range(dishesWaitRange.x, dishesWaitRange.y);
+            timeToNextDish = Mathf.Lerp(Random.Range(dishesWaitRange.x, dishesWaitRange.y), 5, (float)dishesMade/speedThreshold);
             timeSinceLastDish = 0;
         }
         if (currentDishes.Count == Mathf.Min(dishesCap, dishesMade + 2)) timeSinceLastDish = 0;
@@ -102,5 +103,14 @@ public class ConveyorBeltController : MonoBehaviour
         dish.GetComponent<DishController>().makeHook();
         dishesMade++;
         PlayerController.heal(20);
+    }
+
+    public float getDanger() {
+        float maxDanger = 0;
+        for(int i = 0; i < currentDishes.Count; i++) {
+            float thisDanger = currentDishes[i].GetComponentInChildren<DishController>().danger;
+            if (thisDanger > maxDanger) maxDanger = thisDanger;
+        }
+        return maxDanger;
     }
 }
