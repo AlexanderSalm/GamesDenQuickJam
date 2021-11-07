@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     public static int health = 100;
@@ -254,7 +255,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public static void plateExpiredHook() {
-        Debug.Log("Expired!");
+        SceneManager.LoadScene("Game Over");
     }
 
     void OnCollisionStay2D(Collision2D col) {

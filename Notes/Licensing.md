@@ -24,3 +24,6 @@
 
 [Vignette](https://www.seekpng.com/ima/u2q8a9i1y3a9r5a9/)
 
+[Game Over Song](https://wingless-seraph.net/en/material-music_horror.html)
+
+[Title Screen Song](https://wingless-seraph.net/en/material-music_dangeon.html)

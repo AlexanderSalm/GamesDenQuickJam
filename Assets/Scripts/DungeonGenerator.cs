@@ -18,10 +18,10 @@ public class DungeonGenerator : MonoBehaviour
         //GenerateDungeon();
         //GenerateKitchen();
     }
-    public void GenerateDungeon()
+    public void GenerateDungeon(int widthMin = 1, int heightMin = 1)
     {
-        int dungeonWidth = Random.Range(1, 5);
-        int dungeonHeight = Random.Range(1, 5);
+        int dungeonWidth = Random.Range(widthMin, 5);
+        int dungeonHeight = Random.Range(heightMin, 5);
         
         int roomWidth = 12;
         int roomHeight = 12;
