@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     public static void heal(int damage) {
-        health = Mathf.Max(health + damage, 100);
+        health = Mathf.Min(health + damage, 100);
         
     }
 
