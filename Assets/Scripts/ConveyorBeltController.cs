@@ -32,12 +32,14 @@ public class ConveyorBeltController : MonoBehaviour
     private Transform tf;
     private AudioSource dishMade;
     private AudioSource newItem;
+    public static AudioSource error;
     // Start is called before the first frame update
     void Start()
     {
         spacing = seperationDistance;
         dishMade = GetComponents<AudioSource>()[0];
         newItem = GetComponents<AudioSource>()[1];
+        error = GetComponents<AudioSource>()[2];
         allDishes = new List<GameObject>();
         currentDishes = new List<GameObject>();
         tf = GetComponent<Transform>();
@@ -70,9 +72,6 @@ public class ConveyorBeltController : MonoBehaviour
         }
         if (currentDishes.Count == Mathf.Min(dishesCap, dishesMade + 2)) timeSinceLastDish = 0;
 
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            makeDish(Random.Range(0, currentDishes.Count));
-        }
     }
 
     void addDish() {

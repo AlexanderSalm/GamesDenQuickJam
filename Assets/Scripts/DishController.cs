@@ -84,16 +84,18 @@ public class DishController : MonoBehaviour
         if (InventoryController.ghostCount < ghostCost) ghostIndicator.GetComponentInChildren<Text>().color = Color.red;
         setTextAlpha(ghostIndicator, closeness);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && CraftMealController.distance > CraftMealController.minDistance) {
+        if (Input.GetKeyDown(KeyCode.Mouse0)) {
             if (RectTransformUtility.RectangleContainsScreenPoint(tf, Input.mousePosition)){
                 if (InventoryController.slimeCount >= slimeCost && 
                     InventoryController.orcCount >= orcCost && 
                     InventoryController.wizardCount >= wizardCost &&
                     InventoryController.ghostCount >= ghostCost) {
-                    GameObject.FindGameObjectsWithTag("Conveyor")[0].GetComponent<ConveyorBeltController>().makeDish(index);
+                    if (CraftMealController.distance > CraftMealController.minDistance) {
+                        GameObject.FindGameObjectsWithTag("Conveyor")[0].GetComponent<ConveyorBeltController>().makeDish(index);
+                    }
                 }
                 else {
-
+                    ConveyorBeltController.error.Play();
                 }
             }
         }
